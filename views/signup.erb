@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>アカウントを作成</title>
+  <style>
+    .title-with-outline {
+      text-shadow: -1px -1px 0 #0074d9, 1px -1px 0 #0074d9, -1px 1px 0 #0074d9, 1px 1px 0 #0074d9; /* テキスト縁取り */
+    }
+
+    form {
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 100%; /* 幅を100%に設定してコンテナの幅いっぱいに広げる */
+      padding: 10px; /* パディングを追加して内部の余白を調整 */
+      margin: 10px 0; /* 上下のマージンを追加して要素間の間隔を調整 */
+      font-size: 16px; /* フォントサイズを調整 */
+      background-color: #d3d3d3;
+    }
+    input[type="text"], input[type="password"], input[type="submit"], a {
+        color: black;
+    }
+    input[type="submit"] {
+      width: auto; /* 幅を自動調整に戻す */
+      padding: 15px 40px; /* パディングを調整してボタンのサイズを変更 */
+      margin: 10px 0; /* 上下のマージンを追加して要素間の間隔を調整 */
+      font-size: 20px; /* フォントサイズを調整 */
+      background-color: black;
+      color: #fffacd; /* テキストの色を白に設定 */
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <h1 class="display-4 title-with-outline title" style="white-space: nowrap;">はじめまして。お名前とパスワードを入力してくださいまし🎶</h1>
+    <form action="/signup" method="post" enctype="multipart/form-data">
+        <input type="text" name="family_id" placeholder="ファミリーidを入れてね★">
+        <input type="text" name="family_name" placeholder="ファミリー名を入れてね★(○○一家,など)">
+        <input type="text" name="password" placeholder="パスワードを入れてね★">
+        <input class="hov login-button" type="submit" value="アカウント作成">
+    </form>
+    <button class="btn btn-primary k-size" onclick="location.href='/';">キャンセル</button>
+</body>
+</html>

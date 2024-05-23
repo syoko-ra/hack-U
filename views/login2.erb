@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ログイン</title>
+  <style>
+    /* テキストの文字色を黒に指定 */
+    input[type="text"], input[type="password"], input[type="submit"], a {
+        color: black;
+    }
+    form {
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 100%; /* 幅を100%に設定してコンテナの幅いっぱいに広げる */
+      padding: 10px; /* パディングを追加して内部の余白を調整 */
+      margin: 10px; /* 上下のマージンを追加して要素間の間隔を調整 */
+      font-size: 16px; /* フォントサイズを調整 */
+      background-color: #d3d3d3;
+    }
+
+    input[type="submit"] {
+      width: auto; /* 幅を自動調整に戻す */
+      padding: 15px 40px; /* パディングを調整してボタンのサイズを変更 */
+      margin: 20px 0; /* 上下のマージンを追加して要素間の間隔を調整 */
+      font-size: 20px; /* フォントサイズを調整 */
+      background-color: black;
+      color: #fffacd; /* テキストの色を白に設定 */
+      border: none;
+      cursor: pointer;
+    }
+        .title-with-outline {
+      text-shadow: -1px -1px 0 #0074d9, 1px -1px 0 #0074d9, -1px 1px 0 #0074d9, 1px 1px 0 #0074d9; /* テキスト縁取り */
+      white-space: nowrap;
+    }
+
+.s {
+  white-space: nowrap;
+}
+
+
+  </style>
+
+</head>
+<body>
+    <h1 class="display-4 title-with-outline title" >ごきげんよう。お名前とパスワードを入力してくださいまし🎶</h1>
+    <form action="/login" method="post" enctype="multipart/form-data">
+      <div class="position-fixed position-senter">
+        <input type="text" name="family_id" placeholder="ファミリーidを入れてね★">
+        <input type="text" name="password" placeholder="パスワードを入れてね★">
+        <input class="hov login-button" type="submit" value="ログイン">
+        </div>
+    </form>
+    <button class="btn btn-primary k-size" onclick="location.href='/';">キャンセル</button>
+</body>
+<script>
+    var messageContainer = createMessageContainer();
+
+    // 各ボタンにマウスが通過したときのイベントを設定
+
+    setMessage('IDかパスワードが間違っています');
+    showMessage();
+
+
+    // メッセージコンテナを生成する関数
+    function createMessageContainer() {
+        var messageContainer = document.createElement('div');
+        messageContainer.style.display = 'none';
+        messageContainer.style.position = 'fixed';
+        messageContainer.style.bottom = '100px';
+        messageContainer.style.left = '100px';
+        messageContainer.style.padding = '20px';
+        messageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        messageContainer.style.color = '#fff';
+        messageContainer.style.borderRadius = '5px';
+        messageContainer.style.zIndex = '9999';
+        document.body.appendChild(messageContainer);
+        return messageContainer;
+    }
+
+    // メッセージを設定する関数
+    function setMessage(message) {
+        messageContainer.textContent = message;
+    }
+
+    // メッセージを表示する関数
+    function showMessage() {
+        messageContainer.style.display = 'block';
+    }
+
+    // メッセージを非表示にする関数
+    function hideMessage() {
+        messageContainer.style.display = 'none';
+    }
+</script>
+</html>

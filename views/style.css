@@ -1,0 +1,206 @@
+@charset "utf-8";
+input[type="text"] {
+    width: 30%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 4px;
+    color: black;
+    background-color: #d3d3d3;
+    /*ファミリー入力欄の幅とか調整*/
+}
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+table td {
+    text-align: center;
+    vertical-align: top;
+    padding: 10px;
+}
+
+table a {
+    text-decoration: none;
+}
+
+.movie-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; 
+}
+.button-container {
+display: flex;
+justify-content: center; /* ボタンを水平方向に中央に配置 */
+align-items: center; /* ボタンを垂直方向に中央に配置 */
+height: 100px; /* 適切な高さに設定 */
+margin-top: 30px; /* 上側の余白を調整 */
+margin-bottom: 30px; /* 下側の余白を調整 */
+}#play-video-button, #video-container {
+position: relative;
+z-index: 999; /* 他の要素よりも高い z-index を設定 */
+}
+
+.button-size {
+    margin: 30px;
+    width: 800px; /* 幅を設定 */
+    height: 100px;
+    flex: 1; /* ボタンの幅を均等に分配 */
+    font-size: 180%;
+    border-radius:20px 20px 20px 20px;
+}
+
+.button-color {
+    background: rgba(144,238,144);
+    text-align: center; /* テキストを中央に配置 */
+}
+
+/* タイトルの縁取りスタイル */
+.title-with-outline {
+    text-shadow: #fff 2px 2px 2px; /* テキスト縁取り */
+}
+a.btn--radius {
+border-radius: 100vh;
+}
+.select-size {
+    margin: 30px;
+    width: 200px; /* 幅を設定 */
+    height: 100px;
+    flex: 1; /* ボタンの幅を均等に分配 */
+    font-size: 180%;
+    border-radius:20px 20px 20px 20px;
+}
+.list-006 {
+    list-style-type: none;
+}
+
+.list-006 li {
+    margin-bottom: 5px;
+    padding: .5em .7em;
+    border-left: 5px solid #2589d0;
+    background-color: #f2f2f2;
+    font-weight: 600;
+}
+
+.list-007 li {
+    margin-bottom: 5px;
+    border-left: 5px solid #000;
+    background-color: rgba(13,121,21,0.8);
+    width: 200px;
+    margin-left: 20px;
+}
+.button-038 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    font-size: 24px;
+    background: #ff0000; /* 赤色の背景 */
+    color: #fff; /* 白色のテキスト */
+    border: none; /* ボーダーを削除 */
+    border-radius: 50%; /* 円形の形状 */
+    cursor: pointer; /* ホバーエフェクト用にカーソルを変更 */
+    transition: transform 0.2s, background 0.2s; /* アニメーションの設定 */
+}
+
+.button-038:hover {
+    animation: anime-button-038 0.3s linear infinite;
+    background: #ff6600; /* ホバー時の背景色変更 */
+    transform: scale(1.1); /* ホバー時にボタンを少し大きくする */
+}
+
+@keyframes anime-button-038 {
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
+.name-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+/*震わす奴*/
+.button-038:hover {
+    animation: anime-button-038 .3s linear infinite;
+}
+
+@keyframes anime-button-038 {
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
+
+
+.box-013 span {
+display: flex;
+justify-content: center;
+align-items: center;
+padding: .5em 0;
+background-color: #2589d0;
+color: #fff;
+font-weight: 600;
+}
+
+.box-013 p {
+margin: 0;
+padding: 1em 1.5em;
+color: #333;
+}
+.box-line {
+flex: 1;
+}
+/* ボックスのコンテナに対してFlexboxを使用 */
+.box-container {
+    display: flex;
+    margin: 20px 10px 0px 10px;
+    justify-content: space-between; /* ボックスをコンテナ内で均等に配置 */
+    align-items: center; /* 垂直方向（高さ）を中央に配置 */
+    
+}
+
+.box-013 {
+    max-width: 300px;
+    border: 2px solid #2589d0;
+    border-radius: 3px;
+    flex: 1; /* ボックスを均等に広げる */
+    height: 400px;
+    background: #fff;
+}
+.button-size-in-box {
+    width: 30px;
+    margin: 30px;
+}
+.box-invisible {
+    display: none;
+}
+.zunda { /* ずんだもんを表示*/
+    width: 500px;
+    height: 500px;
+    /* background: url("/images/zunda/smile.png"); */
+    position: absolute;
+    top: 200px;
+    left: 370px;
+    background-size: cover;
+} 
+.box-in-font-size {
+    font-size: 200%;
+}

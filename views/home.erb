@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <style>
+    @import "https://use.fontawesome.com/releases/v5.13.0/css/all.css";
+
+    </style>
+
+</head>
+<body>
+    <img id="bg-video" src="/images/out.jpg">
+    <!--　ずんだもんを表示する　-->
+    <div class="zunda"></div>
+    <script>
+var imageUrls = [
+    "/images/zunda/smile.png",
+    "/images/zunda/nomal.png",
+    // 他の画像のURLを追加
+];
+
+var zunda = document.querySelector(".zunda");
+var currentImageIndex = 0;
+
+function changeImage() {
+    var nextImageIndex = (currentImageIndex + 1) % imageUrls.length;
+    var nextImage = new Image();
+    
+    nextImage.onload = function () {
+        // 画像が読み込まれたら切り替える
+        zunda.style.backgroundImage = "url('" + imageUrls[nextImageIndex] + "')";
+        currentImageIndex = nextImageIndex;
+    };
+    
+    nextImage.src = imageUrls[nextImageIndex];
+}
+
+// 最初の画像の表示
+changeImage();
+
+// 3秒ごとに画像を切り替える
+setInterval(changeImage, 3000);
+
+// 画像をクリックしたときの処理
+zunda.addEventListener('click', function () {
+    // ランダムな音声を再生
+    playRandomAudio();
+});
+
+// 音声ファイルのリスト
+//ここを変えれば再生する音声も変えられる
+var audioUrls = [
+    'voices/touch/01.wav',
+    'voices/touch/02.wav',
+    'voices/touch/03.wav',
+    'voices/touch/04.wav',
+    'voices/touch/05.wav',
+    'voices/touch/06.wav',
+
+];
+
+function playRandomAudio() {
+    // ランダムなインデックスを生成
+    var randomIndex = Math.floor(Math.random() * audioUrls.length);
+
+    // ランダムな音声ファイルを再生
+    var audio = new Audio(audioUrls[randomIndex]);
+    audio.play();
+}
+
+    </script>
+    <!-- タイトルにクラスを追加してスタイルを適用 -->
+    <div class="button-container">
+        <!--<button  button onclick="location.href='about'"  location.href='http://localhost:3000/about' class="button-size button-color title-with-outline a.btn--radius"><i class="fas fa-cog"></i>設定</button>-->
+<% if session[:done] == 1 %>
+    <div class="button-038" id="go-home-button">
+        帰宅
+    </div>
+
+    <div id="go-home-video-container" style="display: none;">
+        <!-- 動画を再生するためのコンテナ -->
+        <video id="go-home-fullscreen-video" controls>
+            <source src="videos/kitaku.mp4" type="video/mp4">
+            <!-- 動画ファイルのパスを指定 -->
+        </video>
+    </div>
+
+    <script>
+        document.getElementById('go-home-button').addEventListener('click', function () {
+            var audio = new Audio('voices/return/d.wav'); // 音声ファイルのパスを指定
+            var audio = [
+                'voices/return/d.wav',
+                'voices/return/e.wav',
+                'voices/return/f.wav'
+            ];
+            var randomIndex = Math.floor(Math.random() * audio.length);
+
+    // ランダムな音声ファイルを再生
+            var audio = new Audio(audio[randomIndex]);
+            audio.play();
+            audio.addEventListener('ended', function (){
+            document.getElementById('go-home-button').style.display = 'none';
+            document.getElementById('go-home-video-container').style.display = 'block';
+            <% session[:voice]=1 %>
+            // 動画再生が終了したら元の画面に戻る
+            var videoElement = document.getElementById('go-home-fullscreen-video');
+            videoElement.addEventListener('ended', function () {
+                // 全画面表示を解除
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+
+                // 動画コンテナとボタンを表示
+                document.getElementById('go-home-video-container').style.display = 'none';
+                document.getElementById('go-home-button').style.display = 'block';
+
+                // ボタンをクリックしたらリダイレクト
+                window.location.href = '/switch';
+            });
+
+            // 動画を全画面表示にする（ブラウザ依存）
+            if (videoElement.requestFullscreen) {
+                videoElement.requestFullscreen();
+            } else if (videoElement.mozRequestFullScreen) {
+                videoElement.mozRequestFullScreen();
+            } else if (videoElement.webkitRequestFullscreen) {
+                videoElement.webkitRequestFullscreen();
+            } else if (videoElement.msRequestFullscreen) {
+                videoElement.msRequestFullscreen();
+            }
+
+            // 動画を再生
+            videoElement.controls = false;
+            videoElement.play();
+             });
+        });
+    </script>
+
+<% end %>
+
+
+
+    </div>
+    
+<div class="box-container">
+        <div class="box-013">
+            <span class="box-in-font-size top-box"><%= session[:user_name] %></span>
+            <div class="font-start">
+            <% @families.each do |family| %>
+                <button class="name-button box-in-font-size name-txt" onclick="submitForm('<%= family[0] %>')"><%= family[1] %></button>
+                <form action="/family_item" method="post" enctype="multipart/form-data" id="form-<%= family[0] %>" style="display: none;">
+                    <input type="hidden" name="family_id" value="<%= family[0] %>">
+                </form>
+            <% end %>
+
+            <script>
+                function submitForm(familyId) {
+                    var form = document.getElementById('form-' + familyId);
+                    form.submit();
+                }
+            </script>
+            <!--ファミリーをforで全表示-->
+
+            <button id="add-button" class="name-button box-in-font-size plus-txt">+</button>
+            <form action="/family_create" method="post" enctype="multipart/form-data" id="add-form" style="display: none;">
+                <input type="text" id="new-name" name="name" placeholder="なまえ">
+                <input type="submit" class="btn btn-primary button" value="追加">
+            </form>
+            <!--ファミリー追加ボタン-->
+            <script>
+                // JavaScriptを直接記述
+                var addButton = document.getElementById('add-button');
+                var addForm = document.getElementById('add-form');
+                var newNameInput = document.getElementById('new-name');
+
+                addButton.addEventListener('click', function (event) {
+                    event.stopPropagation(); // クリックイベントの伝播を停止
+                    addForm.style.display = 'block';
+                });
+
+                addForm.addEventListener('click', function (event) {
+                    event.stopPropagation(); // クリックイベントの伝播を停止
+                });
+
+                document.addEventListener('click', function (event) {
+                    // フォーム以外をクリックした場合はフォームを閉じる
+                    if (event.target != addForm && event.target != newNameInput) {
+                        addForm.style.display = 'none';
+                    }
+                });
+            </script>
+        </div>
+        </div>
+
+        <div class="box-013">
+            <% if session[:family_id] && session[:done]==0 %>
+                <span class="box-in-font-size"><%= session[:family_name] %>、これ持った？</span>
+                <div class="font-start">
+                <ul>
+                    <% @items.each do |item| %>
+                        <% if item[3]==0 %>
+                            <li>
+                                <input type="checkbox" id="item-<%= item[0] %>" name="selected_items[]" value="<%= item[0] %>">
+                                <label for="item-<%= item[0] %>"><%= item[1] %></label>
+                            </li>
+                        <% end %>
+                    <% end %>
+                </ul>
+                <!-- アイテム追加フォーム -->
+                <button class="name-button box-in-font-size puls-txt" id="add-item-button">+</button>
+                <form action="/add_item" method="post" enctype="multipart/form-data" id="add-item-form" style="display: none;">
+                    <input type="text" id="new-item-name" name="name" placeholder="忘れ物名">
+                    <input type="submit" class="btn btn-primary button" value="追加">
+                </form>
+
+                <!-- JavaScriptコード（フォーム表示/非表示の制御） -->
+                <script>
+                    var addItemButton = document.getElementById('add-item-button');
+                    var addItemForm = document.getElementById('add-item-form');
+                    var newItemNameInput = document.getElementById('new-item-name');
+
+                    addItemButton.addEventListener('click', function (event) {
+                        event.stopPropagation(); // クリックイベントの伝播を停止
+                        addItemForm.style.display = 'block';
+                    });
+
+                    addItemForm.addEventListener('click', function (event) {
+                        event.stopPropagation(); // クリックイベントの伝播を停止
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        // フォーム以外をクリックした場合はフォームを閉じる
+                        if (event.target != addItemForm && event.target != newItemNameInput) {
+                            addItemForm.style.display = 'none';
+                        }
+                    });
+                </script>
+
+                <button class="name-button box-in-font-size"  id="submit-items-button">提出</button>
+                <script>
+                    var submitItemsButton = document.getElementById('submit-items-button');
+                    var selectedItems = document.querySelectorAll('input[name="selected_items[]"]');
+
+                    submitItemsButton.addEventListener('click', function (event) {
+                        event.preventDefault(); // フォームの通常の送信を防止
+                        var selectedItemsValues = [];
+
+                        // 選択されたアイテムを取得
+                        selectedItems.forEach(function (item) {
+                            if (item.checked) {
+                                selectedItemsValues.push(item.value);
+                            }
+                        });
+
+                        // 選択されたアイテムがある場合にフォームを送信
+                        if (selectedItemsValues.length > 0) {
+                            // "/done" にフォームを送信
+                            var form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = '/done';
+
+                            // 選択されたアイテムを隠しフィールドに追加
+                            selectedItemsValues.forEach(function (value) {
+                                var hiddenField = document.createElement('input');
+                                hiddenField.type = 'hidden';
+                                hiddenField.name = 'selected_items[]';
+                                hiddenField.value = value;
+                                form.appendChild(hiddenField);
+                            });
+
+                            // フォームをページに追加して送信
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    });
+                </script>
+
+
+            <% elsif session[:family_id]%>
+                <span class="box-in-font-size top-box"><%= session[:family_name] %>はおでかけ中...</span>
+                <p>おでかけ中</p>
+            <%end%>
+            </div>
+        </div>
+    </div>
+<script>
+    var messageContainer = createMessageContainer();
+    
+    var buttons = document.querySelectorAll('.name-txt, .plus-txt ,.delete-item-button');
+
+    // 各ボタンにマウスが通過したときのイベントを設定
+    buttons.forEach(function (button) {
+        button.addEventListener('mouseover', function () {
+            // クリックされたボタンのクラス名によってメッセージを設定
+            if (button.classList.contains('name-txt')) {
+                setMessage('この名前でログインします');
+            } else if (button.classList.contains('plus-txt')) {
+                setMessage('追加します');
+            } else if (button.classList.contains('delete-item-button')) {
+                setMessage('持ち物リストから完全に削除します');
+            }
+            showMessage();
+        });
+
+        button.addEventListener('mouseout', function () {
+            hideMessage();
+        });
+    });
+
+    // メッセージコンテナを生成する関数
+    function createMessageContainer() {
+        var messageContainer = document.createElement('div');
+        messageContainer.style.display = 'none';
+        messageContainer.style.position = 'fixed';
+        messageContainer.style.bottom = '50px';
+        messageContainer.style.left = '100px';
+        messageContainer.style.padding = '20px';
+        messageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        messageContainer.style.color = '#fff';
+        messageContainer.style.borderRadius = '5px';
+        messageContainer.style.zIndex = '9999';
+        document.body.appendChild(messageContainer);
+        return messageContainer;
+    }
+
+    // メッセージを設定する関数
+    function setMessage(message) {
+        messageContainer.textContent = message;
+    }
+
+    // メッセージを表示する関数
+    function showMessage() {
+        messageContainer.style.display = 'block';
+    }
+
+    // メッセージを非表示にする関数
+    function hideMessage() {
+        messageContainer.style.display = 'none';
+    }
+</script>
+    
+    
+
+
+
+</body>
+</html>

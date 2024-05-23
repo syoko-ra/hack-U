@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@1.1.1/dist/full.css">
+
+    <title>アレもった？</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script>
+        (function (d) {
+            var config = {
+                kitId: 'ybq4sum',
+                scriptTimeout: 3000,
+                async: true
+            },
+                h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { }
+            }; s.parentNode.insertBefore(tk, s)
+        })(document);
+
+    </script>
+    <style>
+        .flex-item {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .name-button {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 5px;
+            opacity: 0.8;
+        }
+        a {
+            color: lightyellow;
+        }
+
+        a:hover {
+            color: #deb887;
+        }
+
+
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            background: url('back.png');
+            background-size: cover;
+        }
+
+        body {
+            margin: 10px;
+            padding: 50px 60px 0px 0px;
+            padding-left: 70px;
+            color: #000;
+            background-color: black;
+            font-family: "elegant", 'Zen Kurenaido', sans-serif, 'Zen Kurenaido', 'Ubuntu', sans-serif;
+            font-weight: 900;
+            font-style: normal;
+            background-image: url("/images/back.png");
+            background-size: cover;
+        }
+        .navbar .navbar-right {
+            margin-right: 0;
+        }
+        .title-with-outline {
+            text-shadow: -1px -1px 0 #0074d9, 1px -1px 0 #0074d9, -1px 1px 0 #0074d9, 1px 1px 0 #0074d9; /* テキスト縁取り */
+        }
+                input[type="text"] {
+            width: 30%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 4px;
+            color: black;
+            background-color: #d3d3d3;
+            /*ファミリー入力欄の幅とか調整*/
+        }
+
+        .movie-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px; 
+        }
+.button-container {
+    display: flex;
+    justify-content: center; /* ボタンを水平方向に中央に配置 */
+    align-items: center; /* ボタンを垂直方向に中央に配置 */
+    height: 100px; /* 適切な高さに設定 */
+    margin-top: 30px; /* 上側の余白を調整 */
+    margin-bottom: 30px; /* 下側の余白を調整 */
+}#play-video-button, #video-container {
+    position: relative;
+    z-index: 999; /* 他の要素よりも高い z-index を設定 */
+}
+
+
+        .button-color {
+            background: rgba(144,238,144);
+            text-align: center; /* テキストを中央に配置 */
+        }
+
+        /* タイトルの縁取りスタイル */
+        .title-with-outline {
+            text-shadow: #fff 2px 2px 2px; /* テキスト縁取り */
+        }
+        a.btn--radius {
+        border-radius: 100vh;
+        }
+        .select-size {
+            margin: 30px;
+            width: 200px; /* 幅を設定 */
+            height: 100px;
+            flex: 1; /* ボタンの幅を均等に分配 */
+            font-size: 180%;
+            border-radius:20px 20px 20px 20px;
+        }
+        .button-038 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 150px;
+            height: 150px;
+            font-size: 24px;
+            background: #ff0000; /* 赤色の背景 */
+            color: #fff; /* 白色のテキスト */
+            border: none; /* ボーダーを削除 */
+            border-radius: 50%; /* 円形の形状 */
+            cursor: pointer; /* ホバーエフェクト用にカーソルを変更 */
+            transition: transform 0.2s, background 0.2s; /* アニメーションの設定 */
+            position: fixed;
+        }
+
+        .button-038:hover {
+            animation: anime-button-038 0.3s linear infinite;
+            background: #ff6600; /* ホバー時の背景色変更 */
+            transform: scale(1.1); /* ホバー時にボタンを少し大きくする */
+        }
+
+        @keyframes anime-button-038 {
+            20% {
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                transform: translate(-2px, -2px);
+            }
+            60% {
+                transform: translate(2px, 2px);
+            }
+            80% {
+                transform: translate(2px, -2px);
+            }
+        }
+        .name-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+/*震わす奴*/
+        .button-038:hover {
+            animation: anime-button-038 .3s linear infinite;
+        }
+
+        @keyframes anime-button-038 {
+            20% {
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                transform: translate(-2px, -2px);
+            }
+            60% {
+                transform: translate(2px, 2px);
+            }
+            80% {
+                transform: translate(2px, -2px);
+            }
+        }
+
+
+.box-013 span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5em 0;
+    background-color: #FFC521;
+    font-weight: 600;
+}
+
+.box-013 p {
+    margin: 0;
+    padding: 1em 1.5em;
+    font-size: 300%;
+
+}
+.box-line {
+    flex: 1;
+}
+        /* ボックスのコンテナに対してFlexboxを使用 */
+        .box-container {
+            display: flex;
+            justify-content: space-between; /* ボックスをコンテナ内で均等に配置 */
+            align-items: center; /* 垂直方向（高さ）を中央に配置 */
+            
+        }
+
+        .box-013 {
+            border-radius: 30px 30px 30px 30px;
+            max-width: 300px;
+            flex: 1; /* ボックスを均等に広げる */
+            height: 600px;
+            max-height: 2000px;
+            background: #fff;
+            padding: 0px 5px 5px 5px;
+            
+        }
+        .button-size-in-box {
+            width: 30px;
+            
+            font-size: 200%;
+        }
+        .box-invisible {
+            display: none;
+        }
+        .zunda { /* ずんだもんを表示*/
+            width: 500px;
+            height: 500px;
+            /* background: url("/images/zunda/smile.png"); */
+            position: fixed;
+            top: 200px;
+            left: 370px;
+            background-size: cover;
+        } 
+        .top-box {
+            transform: scale(1.037, 1.03);
+            border-radius: 30px 30px 0px 0px;
+        }
+        .box-in-font-size {
+            
+            font-size: 200%;
+            color: #000;
+        }
+        .font-start{
+            margin: 10px;
+        }
+        .name-button {
+            background-color: rgba(144,238,144);
+        }
+        .name-button:hover {
+            color: #fff;
+            background-color: #FFC521;
+        }
+        .box-span {
+            border-radius: 30px 30px 30px 30px;
+        }
+        .black {
+            color: black;
+        }
+            .login-button {
+                border-radius: 20px 20px 20px 20px;
+    }
+    .name-txt {
+
+    }
+        .k-size {
+      font-size: 200%;
+      height: 50px;
+    }
+    .hov{
+        border: 2px solid #000;
+        background: #000;
+    }
+    .hov:hover {
+        background: #fff;
+        color:rgb(10,100,100);
+    }
+    .position-senter {
+      padding: 75px 100px 0px 100px;
+    }
+    .title {
+      padding: 100px 50px 0px 50px;
+      color: #fff;
+    }
+    .plus-txt .delete-item-button{
+        /*ダミー*/
+    }
+
+    
+    </style>
+</head>
+
+<body>
+
+<audio id="bgm">
+    <source src="/musics/maou_bgm_healing15.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    var audio = document.getElementById("bgm");
+    audio.volume = 0.1;
+    var audio = document.getElementById("bgm");
+    var isPlaying = false;
+
+    function toggleAudio() {
+        if (isPlaying) {
+            audio.pause();
+            document.getElementById("toggleAudio").innerHTML = '<i class="glyphicon glyphicon-play"></i>';
+        } else {
+            audio.play();
+            document.getElementById("toggleAudio").innerHTML = '<i class="glyphicon glyphicon-pause"></i>';
+        }
+        isPlaying = !isPlaying;
+    }
+</script><audio id="bgm" src="bgm.mp3" loop autoplay></audio>
+<script>
+  const bgm = document.getElementById('bgm');
+  window.addEventListener('beforeunload', () => {
+    // ページ遷移前にBGMを一時停止
+    bgm.pause();
+  });
+</script>
+
+
+
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">丸太は持ったな!!</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">HOME</a></li>
+                <li class="active"><a href="/signup">Signup</a></li>
+                <% if session[:user_id] %>
+                <li class="active"><a href="/logout">logout</a></li>
+                <% else%>
+                <li class="active"><a href="/login">login</a></li>
+                <% end %>
+                <li class="active"><a href="/credit">credit</a></li>
+                <li class="active"><a href="/readme">readme</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active">
+                    <a href="#" id="toggleAudio" onclick="toggleAudio()">
+                        <i class="glyphicon glyphicon-play"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<%= yield %>
+</body>
+
+</html>

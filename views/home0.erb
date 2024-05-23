@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <style>
+        table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        table td {
+            text-align: center;
+            vertical-align: top;
+            padding: 10px;
+        }
+
+        table a {
+            text-decoration: none;
+        }
+
+        .movie-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px; 
+        }
+        .position-fixed {
+            position: fixed;
+            border-radius: 30px 30px 30px 30px
+        }
+
+        .button-left {
+            margin:20px;
+            padding: 20px;
+            left: 60px;
+            font-size: 300%;
+        }
+        .button-right {
+            margin:20px;
+            padding: 20px;
+            right: 60px;
+            font-size: 300%;
+        }
+
+        /* タイトルの縁取りスタイル */
+        .title-with-outline {
+            text-shadow: -1px -1px 0 #0074d9, 1px -1px 0 #0074d9, -1px 1px 0 #0074d9, 1px 1px 0 #0074d9; /* テキスト縁取り */
+        }
+        .zunda { /* ずんだもんを表示*/
+            width: 500px;
+            height: 500px;
+            /* background: url("/images/zunda/smile.png"); */
+            position: fixed;
+            top: 200px;
+            left: 370px;
+            background-size: cover;
+        } 
+        .font-color {
+            color: #fff;
+        }
+        h1 {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!--　ずんだもんを表示する　-->
+    <div class="zunda"></div>
+        <script>
+var imageUrls = [
+    "/images/zunda/smile.png",
+    "/images/zunda/nomal.png",
+    // 他の画像のURLを追加
+];
+
+var zunda = document.querySelector(".zunda");
+var currentImageIndex = 0;
+
+function changeImage() {
+    var nextImageIndex = (currentImageIndex + 1) % imageUrls.length;
+    var nextImage = new Image();
+    
+    nextImage.onload = function () {
+        // 画像が読み込まれたら切り替える
+        zunda.style.backgroundImage = "url('" + imageUrls[nextImageIndex] + "')";
+        currentImageIndex = nextImageIndex;
+    };
+    
+    nextImage.src = imageUrls[nextImageIndex];
+}
+
+// 最初の画像の表示
+changeImage();
+
+// 3秒ごとに画像を切り替える
+setInterval(changeImage, 3000);
+
+    </script>
+    <!-- タイトルにクラスを追加してスタイルを適用 -->
+    <h1 class="display-4 title-with-outline font-color">"アレ"、持った？ ずんだチェッカー</h1>
+    <button class="btn-primary button-left position-fixed" onclick="location.href='/login'">ログイン</button>
+    <button class="btn-secondary button-right position-fixed" onclick="location.href='/signup'">アカウント作成</button>
+</body>
+</html>
